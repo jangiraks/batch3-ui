@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import LoginIndex from './component/login/loginindex';
+import CreateUser from './component/user/create';
 
 function App() {
   return (
@@ -19,7 +19,8 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <LoginIndex />
+      <CreateUser />
+      {/* <LoginIndex /> */}
     </div>
   );
 }
