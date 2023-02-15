@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import CreateUser from './component/user/create';
+import Address from './component/address/Address';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         </a>
       </header> */}
       <CreateUser />
+      <Address />
+
       {/* <LoginIndex /> */}
     </div>
   );

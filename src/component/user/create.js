@@ -4,6 +4,12 @@ import axios from 'axios';
 function CreateUser() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [dob, setdob] = useState('');
+    const [Mobile, setMobile] = useState();
+    const [Email, setEmail] = useState('');
+    const [Gender, setGender] = useState('');
+    const [Password, setPassword] = useState('');
+
 
     const onFirstNameChange = (e) => {
         setFirstName(e.target.value);
@@ -11,16 +17,35 @@ function CreateUser() {
     const onLastNameChange = (event) => {
         setLastName(event.target.value)
     }
+
+    const onDOBChange = (e) => {
+        setdob(e.target.value)
+    }
+
+    const onMobileChange = (e) => {
+        setMobile(e.target.value)
+    }
+
+    const onEmailChange = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const onGenderChange = (e) => {
+        setGender(e.target.value)
+    }
+
+    const onPasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
     const onSave = () => {
-        //alert(firstName + ' ' + lastName)
         var data = {
             firstname: firstName,
             lastname: lastName,
-            dob: "10-11-2000",
-            mobile: 9982333574,
-            email: "hemraj@gmail.com",
-            gender: "male",
-            password: 'abc'
+            dob: dob,
+            mobile: Mobile,
+            email: Email,
+            gender: Gender,
+            password: Password
         }
         axios.post('http://localhost:4000/user/save', data)
             .then(function (response) {
@@ -49,31 +74,34 @@ function CreateUser() {
                     <tr>
                         <td>Dob</td>
                         <td>
-                            <input type={Text} ></input>
+                            <input type={Date} value={dob} onChange={onDOBChange} ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Mobile</td>
                         <td>
-                            <input type={Text} ></input>
+                            <input type={Number} value={Mobile} onChange={onMobileChange} ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Email</td>
                         <td>
-                            <input type={Text} ></input>
+                            <input type={Text} value={Email} onChange={onEmailChange} ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Gender</td>
                         <td>
-                            <input type={Text} ></input>
+                            <label>Male</label>
+                            <input type={'radio'} name={"gender"} value={"Male"} onChange={onGenderChange} ></input>
+                            <label>Female</label>
+                            <input type={'radio'} name={"gender"} value={"Female"} onChange={onGenderChange} ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Password</td>
                         <td>
-                            <input type={"password"} ></input>
+                            <input type={"password"} value={Password} onChange={onPasswordChange} ></input>
                         </td>
                     </tr>
                     <tr>
