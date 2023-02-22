@@ -57,36 +57,36 @@ function CreateUser() {
 
     return (
         <div>
-            <table>
+            <table >
                 <tbody>
                     <tr>
                         <td>First name</td>
                         <td>
-                            <input type={Text} value={firstName} onChange={onFirstNameChange} ></input>
+                            <input type={'text'} value={firstName} onChange={onFirstNameChange} ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Last name</td>
                         <td>
-                            <input type={Text} value={lastName} onChange={onLastNameChange}  ></input>
+                            <input type={'text'} value={lastName} onChange={onLastNameChange}  ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Dob</td>
                         <td>
-                            <input type={Date} value={dob} onChange={onDOBChange} ></input>
+                            <input type={'date'} value={dob} onChange={onDOBChange} ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Mobile</td>
                         <td>
-                            <input type={Number} value={Mobile} onChange={onMobileChange} ></input>
+                            <input type={'number'} value={Mobile} onChange={onMobileChange} ></input>
                         </td>
                     </tr>
                     <tr>
                         <td>Email</td>
                         <td>
-                            <input type={Text} value={Email} onChange={onEmailChange} ></input>
+                            <input type={'text'} value={Email} onChange={onEmailChange} ></input>
                         </td>
                     </tr>
                     <tr>
@@ -112,7 +112,7 @@ function CreateUser() {
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div >
     );
 }
 

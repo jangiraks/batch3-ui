@@ -1,7 +1,11 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import CreateUser from './component/user/create';
 import Address from './component/address/Address';
+import HeadUser from './component/header/head';
+import ListUser from './component/user/list';
+
+
 
 function App() {
   return (
@@ -20,8 +24,11 @@ function App() {
           Learn React
         </a>
       </header> */}
+      {/* <HeadUser /> */}
       <CreateUser />
-      <Address />
+
+      <ListUser />
+      {/* <Address /> */}
 
       {/* <LoginIndex /> */}
     </div>

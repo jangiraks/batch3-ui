@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Address() {
@@ -10,9 +10,27 @@ function Address() {
     const [state, setstate] = useState('');
     const [country, setcountry] = useState('');
     const [zip, setzip] = useState('');
+    const [User, setUser] = useState('');
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        getUsers();
+    }, [])
+    const getUsers = () => {
+        axios.get('http://localhost:4000/user')
+            .then(function (response) {
+                // handle success
+                //console.log(response.data)
+                setUsers(response.data);
+            })
+    }
 
     const onHousenumberChange = (e) => {
         setHousenumber(e.target.value);
+    }
+    const onUserChange = (e) => {
+        alert(e.target.value)
+        setUser(e.target.value);
     }
     const onstreetChange = (event) => {
         setstreet(event.target.value)
@@ -37,6 +55,7 @@ function Address() {
     }
     const onSave = () => {
         var data = {
+            user: User,
             housenumber: Housenumber,
             street: street,
             address: address,
@@ -58,6 +77,17 @@ function Address() {
         <div>
             <table>
                 <tbody>
+                    <tr>
+                        <td>User</td>
+                        <td>
+                            <select onChange={onUserChange} >
+                                {users.map((u) => {
+                                    return <option value={u._id} >{u.firstname} {u.lastname} {u.mobile}</option>
+                                })}
+
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Housenumber</td>
                         <td>
