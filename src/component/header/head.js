@@ -6,7 +6,7 @@ function HeadUser() {
 
     return (
         <div>
-            <header>
+            {/* <header>
                 <nav>
                     <div class="logo">
                         <img src="logo.png" />
@@ -249,7 +249,7 @@ function HeadUser() {
                         </div>
                     </div>
                 </div>
-            </main>
+            </main> */}
         </div >
     );
 

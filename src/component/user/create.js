@@ -57,7 +57,8 @@ function CreateUser() {
 
     return (
         <div>
-            <table >
+            <h1 className='creat'>Creat Account</h1>
+            <table id="customers" className='customers'>
                 <tbody>
                     <tr>
                         <td>First name</td>
@@ -105,14 +106,15 @@ function CreateUser() {
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td>
-                            <input type={"button"} value="Save" onClick={onSave} ></input>
+
+                        <td className='button' colspan="2">
+                            <input className='save' type={"button"} value="Save" onClick={onSave} ></input>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div >
+
     );
 }
 

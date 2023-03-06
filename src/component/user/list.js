@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ReactTable from "react-table";
+import Table from '../common/OsTable';
 
 function ListUser() {
 
@@ -20,34 +22,20 @@ function ListUser() {
             })
     }
 
+    const columns = [{
+        Header: 'First Name',
+        accessor: 'firstname'
+    }, {
+        Header: 'Last Name',
+        accessor: 'lastname'
+    }]
     return (
         <div>
-            <table >
-                <thead>
-                    <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Dob</th>
-                        <th>Mobile</th>
-                        <th>Email</th>
-                        <th>Gender</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {userdata.map((u) => {
-                        return <tr>
-                            <td>{u.firstname}</td>
-                            <td>{u.lastname}</td>
-                            <td>{u.dob}</td>
-                            <td>{u.mobile}</td>
-                            <td>{u.email}</td>
-                            <td>{u.gender}</td>
-                        </tr>
-                    })}
-
-                </tbody>
-            </table>
-        </div >
+            <Table
+                data={userdata}
+                columns={columns}
+            />
+        </div>
     );
 }
 

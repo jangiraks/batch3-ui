@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import env from '../../env';
 
 function Address() {
     const [Housenumber, setHousenumber] = useState('');
@@ -7,21 +8,44 @@ function Address() {
     const [address, setaddress] = useState('');
     const [landmark, setlandmark] = useState('');
     const [city, setcity] = useState('');
+    const [cities, setcities] = useState([]);
     const [state, setstate] = useState('');
+    const [states, setstates] = useState([]);
     const [country, setcountry] = useState('');
+    const [countries, setcountries] = useState([]);
     const [zip, setzip] = useState('');
     const [User, setUser] = useState('');
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
         getUsers();
+        getcountries();
+
     }, [])
+
+
     const getUsers = () => {
         axios.get('http://localhost:4000/user')
             .then(function (response) {
                 // handle success
                 //console.log(response.data)
                 setUsers(response.data);
+            })
+    }
+    const getcountries = () => {
+        axios.get('http://localhost:4000/country')
+            .then(function (response) {
+                // handle success
+                //console.log(response.data)
+                setcountries(response.data);
+            })
+    }
+    const getstates = (cid) => {
+        axios.get(`${env.baseApiUrl}/state/country/${cid}`)
+            .then(function (response) {
+                // handle success
+                //console.log(response.data)
+                setstates(response.data);
             })
     }
 
@@ -42,13 +66,21 @@ function Address() {
         setaddress(event.target.value)
     }
     const oncityChange = (e) => {
+        //alert(e.target.value)
         setcity(e.target.value);
     }
     const onstateChange = (event) => {
-        setstate(event.target.value)
+        let stateid = event.target.value;
+        axios.get(`http://localhost:4000/city/state/${stateid}`)
+            .then(function (response) {
+                // handle success
+                //console.log(response.data)
+                setcities(response.data);
+            })
     }
     const oncountryChange = (e) => {
-        setcountry(e.target.value);
+        getstates(e.target.value);
+        //setUser(e.target.value);
     }
     const onzipChange = (event) => {
         setzip(event.target.value)
@@ -75,7 +107,8 @@ function Address() {
 
     return (
         <div>
-            <table>
+            <h1 className='creat'>User Address</h1>
+            <table id="customers" className='customers'>
                 <tbody>
                     <tr>
                         <td>User</td>
@@ -113,23 +146,42 @@ function Address() {
                         </td>
                     </tr>
                     <tr>
-                        <td>city</td>
+                        <td>country</td>
                         <td>
-                            <input type={Text} value={city} onChange={oncityChange} ></input>
+                            <select onChange={oncountryChange} >
+                                <option value='0' >--Select Country--</option>
+                                {countries.map((u) => {
+                                    return <option value={u._id} >{u.name}</option>
+                                })}
+
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td>state</td>
                         <td>
-                            <input type={Text} value={state} onChange={onstateChange}  ></input>
+                            <select onChange={onstateChange} >
+                                <option value='0' >--Select State--</option>
+                                {states.map((u) => {
+                                    return <option value={u._id} >{u.name}</option>
+                                })}
+
+                            </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>country</td>
+                        <td>city</td>
                         <td>
-                            <input type={Text} value={country} onChange={oncountryChange} ></input>
+                            <select onChange={oncityChange} >
+                                <option value='0' >--Select City--</option>
+                                {cities.map((u) => {
+                                    return <option value={u._id} >{u.name}</option>
+                                })}
+
+                            </select>
                         </td>
                     </tr>
+
                     <tr>
                         <td>zip</td>
                         <td>
@@ -137,9 +189,8 @@ function Address() {
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td>
-                            <input type={"button"} value="Save" onClick={onSave} ></input>
+                        <td className='button' colspan="2">
+                            <input className='save' type={"button"} value="Save" onClick={onSave} ></input>
                         </td>
                     </tr>
                 </tbody>
