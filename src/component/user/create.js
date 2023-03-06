@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {Input} from 'antd'
 
 function CreateUser() {
     const [firstName, setFirstName] = useState('');
@@ -63,7 +64,7 @@ function CreateUser() {
                     <tr>
                         <td>First name</td>
                         <td>
-                            <input type={'text'} value={firstName} onChange={onFirstNameChange} ></input>
+                            <Input type={'text'} value={firstName} onChange={onFirstNameChange} ></Input>
                         </td>
                     </tr>
                     <tr>
