@@ -1,52 +1,30 @@
-import React, { useState } from 'react';
+import { Button, Col, Form, Input, message, Row, Radio, DatePicker } from "antd";
+import React, { useState } from "react";
 import axios from 'axios';
-import {Input} from 'antd'
 
-function CreateUser() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [dob, setdob] = useState('');
-    const [Mobile, setMobile] = useState();
-    const [Email, setEmail] = useState('');
-    const [Gender, setGender] = useState('');
-    const [Password, setPassword] = useState('');
+//import axiosInstance from "../axiosInstance";
 
+const Creatuser = () => {
 
-    const onFirstNameChange = (e) => {
-        setFirstName(e.target.value);
-    }
-    const onLastNameChange = (event) => {
-        setLastName(event.target.value)
-    }
+    const [firstname, setFirstname] = useState();
+    const [lastname, setLastname] = useState();
+    const [email, setEmail] = useState();
+    const [mobile, setMobile] = useState();
+    const [password, setPassword] = useState();
+    const [address, setAddress] = useState();
+    const [gender, setGender] = useState();
+    const [dob, setDOB] = useState();
 
-    const onDOBChange = (e) => {
-        setdob(e.target.value)
-    }
-
-    const onMobileChange = (e) => {
-        setMobile(e.target.value)
-    }
-
-    const onEmailChange = (e) => {
-        setEmail(e.target.value)
-    }
-
-    const onGenderChange = (e) => {
-        setGender(e.target.value)
-    }
-
-    const onPasswordChange = (e) => {
-        setPassword(e.target.value)
-    }
-    const onSave = () => {
+    const onsave = () => {
+        debugger
         var data = {
-            firstname: firstName,
-            lastname: lastName,
+            firstname: firstname,
+            lastname: lastname,
             dob: dob,
-            mobile: Mobile,
-            email: Email,
-            gender: Gender,
-            password: Password
+            mobile: mobile,
+            email: email,
+            gender: gender,
+            password: password
         }
         axios.post('http://localhost:4000/user/save', data)
             .then(function (response) {
@@ -54,69 +32,177 @@ function CreateUser() {
                 alert(response.data)
             })
 
-    }
+    };
 
     return (
-        <div>
-            <h1 className='creat'>Creat Account</h1>
-            <table id="customers" className='customers'>
-                <tbody>
-                    <tr>
-                        <td>First name</td>
-                        <td>
-                            <Input type={'text'} value={firstName} onChange={onFirstNameChange} ></Input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Last name</td>
-                        <td>
-                            <input type={'text'} value={lastName} onChange={onLastNameChange}  ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Dob</td>
-                        <td>
-                            <input type={'date'} value={dob} onChange={onDOBChange} ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mobile</td>
-                        <td>
-                            <input type={'number'} value={Mobile} onChange={onMobileChange} ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>
-                            <input type={'text'} value={Email} onChange={onEmailChange} ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Gender</td>
-                        <td>
-                            <label>Male</label>
-                            <input type={'radio'} name={"gender"} value={"Male"} onChange={onGenderChange} ></input>
-                            <label>Female</label>
-                            <input type={'radio'} name={"gender"} value={"Female"} onChange={onGenderChange} ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td>
-                            <input type={"password"} value={Password} onChange={onPasswordChange} ></input>
-                        </td>
-                    </tr>
-                    <tr>
+        <div className="signup-form-page">
+            <Form
+                name="basic"
+                labelCol={{
+                    span: 8,
+                }}
+                wrapperCol={{
+                    span: 14,
+                }}
+            >
+                <Row justify="center">
+                    <Col span={13}>
+                        <Form.Item
+                            colon={false}
+                            label="First Name"
+                            name="first name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please enter your first name",
+                                },
+                            ]}
+                        >
+                            <Input
+                                placeholder="First Name"
+                                onChange={(e) => setFirstname(e.target.value)}
+                                value={firstname}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col span={13}>
+                        <Form.Item
+                            colon={false}
+                            label="Last Name"
+                            name="last name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please enter your last name",
+                                },
+                            ]}
+                        >
+                            <Input
+                                placeholder="Name"
+                                onChange={(e) => setLastname(e.target.value)}
+                                value={lastname}
+                            />
+                        </Form.Item>
+                    </Col>
 
-                        <td className='button' colspan="2">
-                            <input className='save' type={"button"} value="Save" onClick={onSave} ></input>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div >
+                    <Col span={13}>
+                        <Form.Item
+                            colon={false}
+                            label="Mobile :"
+                            name="mobile"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please enter your mobile Number",
+                                },
+                                {
+                                    max: "10",
+                                    massage: "Maxium 10 Digits",
+                                },
+                            ]}
+                        >
+                            <Input
+                                placeholder="Mobile"
+                                maxLength={10}
+                                minLength={10}
+                                onChange={(e) => setMobile(e.target.value)}
+                                value={mobile}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col span={13}>
+                        <Form.Item
+                            colon={false}
+                            label="DOB :"
+                            name="Date Of Birth"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please enter Your Date Of Birth ",
+                                },
+                            ]}
+                        >
+                            <DatePicker
 
+                                placeholder="DOB"
+                                onChange={(e) => setDOB(e)}
+                                value={dob}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col span={13}>
+                        <Form.Item
+                            colon={false}
+                            label="Gender :"
+                            name="gender"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please slect your gender",
+                                },
+                            ]}
+                        >
+
+                            <Radio.Group onChange={setGender} value={gender}>
+                                <Radio value={1}>Male</Radio>
+                                <Radio value={2}>Female</Radio>
+                                <Radio value={3}>Other</Radio>
+
+                            </Radio.Group>
+                        </Form.Item>
+                    </Col>
+                    <Col span={13}>
+                        <Form.Item
+                            colon={false}
+                            label="Email :"
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please enter your email",
+                                    type: "email",
+                                },
+                            ]}
+                        >
+                            <Input
+                                placeholder="Email"
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                            />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={13}>
+                        <Form.Item
+                            colon={false}
+                            label="Password"
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please enter your password",
+                                },
+                            ]}
+                        >
+                            <Input.Password
+                                type="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                placeholder="Password"
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row justify="end">
+                    <Col span={11}>
+                        <Button type="primary" htmlType="submit" onClick={onsave}>
+                            Sign up
+                        </Button>
+                    </Col>
+                </Row>
+            </Form>
+        </div>
     );
-}
+};
 
-export default CreateUser;
+export default Creatuser;
